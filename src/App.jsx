@@ -1,22 +1,22 @@
 import React, { useMemo, useState } from "react";
 
 const tabs = [
-  { key: "business", label: "Businessプラン" },
   { key: "personal", label: "Personalプラン" },
+  { key: "business", label: "Businessプラン" },
   { key: "enterprise", label: "Enterpriseプラン" },
 ];
 
 const plansBusiness = [
-  { name: "Trial", hours: 1, price: 1300, transcriptionWords: 500, translationWords: 5000, meetingTemplates: true },
-  { name: "Professional", hours: 10, price: 12000, transcriptionWords: 500, translationWords: 5000, meetingTemplates: true },
-  { name: "Premium", hours: 30, price: 33000, popular: true, transcriptionWords: 500, translationWords: 5000, meetingTemplates: true },
-  { name: "Premium Plus", hours: 100, price: 100000, transcriptionWords: 500, translationWords: 5000, meetingTemplates: true },
+  { name: "Trial", hours: 1, price: 1300, transcriptionWords: 500, translationWords: 5000 },
+  { name: "Professional", hours: 10, price: 12000, transcriptionWords: 500, translationWords: 5000 },
+  { name: "Premium", hours: 30, price: 33000, popular: true, transcriptionWords: 500, translationWords: 5000 },
+  { name: "Premium Plus", hours: 100, price: 100000, transcriptionWords: 500, translationWords: 5000 },
 ];
 
 const plansPersonal = [
-  { name: "Trial", hours: 2, price: 1600, transcriptionWords: 200, translationWords: 1000, meetingTemplates: false },
-  { name: "Professional", hours: 6, price: 4320, transcriptionWords: 200, translationWords: 1000, meetingTemplates: false },
-  { name: "Premium", hours: 15, price: 9600, popular: true, transcriptionWords: 200, translationWords: 1000, meetingTemplates: false },
+  { name: "Trial", hours: 2, price: 1600, transcriptionWords: 200, translationWords: 1000 },
+  { name: "Professional", hours: 6, price: 4320, transcriptionWords: 200, translationWords: 1000 },
+  { name: "Premium", hours: 15, price: 9600, popular: true, transcriptionWords: 200, translationWords: 1000 },
 ];
 
 const enterprisePlan = { 
@@ -81,9 +81,6 @@ function PlanCard({ plan }) {
         <div>個人コンソール付き</div>
         {plan.transcriptionWords && <div>音声辞書: {plan.transcriptionWords.toLocaleString("ja-JP")}語</div>}
         {plan.translationWords && <div>翻訳辞書: {plan.translationWords.toLocaleString("ja-JP")}ペア</div>}
-        {plan.meetingTemplates !== undefined && (
-          <div>会議テンプレート: {plan.meetingTemplates ? "対応" : "非対応"}</div>
-        )}
         {plan.extra && plan.extra.map((e,i)=>(<div key={i}>{e}</div>))}
       </div>
       <button className="mt-6 w-full rounded-xl bg-zinc-900 px-4 py-3 text-sm font-medium text-white hover:opacity-90">{plan.price ? "今すぐ申し込む" : "お問い合わせ"}</button>
@@ -92,7 +89,7 @@ function PlanCard({ plan }) {
 }
 
 export default function PricingPage() {
-  const [activeTab, setActiveTab] = useState("business");
+  const [activeTab, setActiveTab] = useState("personal");
   const plans = activeTab === "business" ? plansBusiness : activeTab === "personal" ? plansPersonal : [enterprisePlan];
 
   return (
@@ -171,7 +168,6 @@ export default function PricingPage() {
               <tr className="border-t"><td className="px-3 py-2">翻訳辞書</td><td className="px-3 py-2">最大1,000ペア</td><td className="px-3 py-2">最大5,000ペア</td><td className="px-3 py-2">最大20,000ペア</td></tr>
               <tr className="border-t"><td className="px-3 py-2">企業通用辞書</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
               <tr className="border-t"><td className="px-3 py-2">ユーザー統一管理</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
-              <tr className="border-t"><td className="px-3 py-2">会議テンプレート</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td><td className="px-3 py-2">◯</td></tr>
               <tr className="border-t"><td className="px-3 py-2">有効期間</td><td className="px-3 py-2">1か月（自動更新）</td><td className="px-3 py-2">1か月（自動更新）</td><td className="px-3 py-2">1年または1年半</td></tr>
               <tr className="border-t"><td className="px-3 py-2">追加パッケージ</td><td className="px-3 py-2">4種類（当月有効）</td><td className="px-3 py-2">4種類（当月有効）</td><td className="px-3 py-2">自由追加</td></tr>
               <tr className="border-t"><td className="px-3 py-2">時間譲渡</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
