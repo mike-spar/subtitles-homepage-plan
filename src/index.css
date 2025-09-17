@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lucide Icons CSS - 使用Unicode字符作为图标 */
+.i-lucide-clock::before { content: "🕐"; }
+.i-lucide-shield-check::before { content: "🛡️"; }
+.i-lucide-bolt::before { content: "⚡"; }
