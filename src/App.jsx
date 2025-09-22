@@ -166,16 +166,25 @@ export default function PricingPage() {
             </thead>
             <tbody>
               <tr className="border-t"><td className="px-3 py-2">対象</td><td className="px-3 py-2">個人ユーザー</td><td className="px-3 py-2">SMB・チーム</td><td className="px-3 py-2">大規模企業・代理店</td></tr>
+              <tr className="border-t"><td className="px-3 py-2">請求書発行</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td><td className="px-3 py-2">◯</td></tr>
               <tr className="border-t"><td className="px-3 py-2">音声辞書</td><td className="px-3 py-2">最大200語</td><td className="px-3 py-2">最大500語</td><td className="px-3 py-2">最大500語</td></tr>
               <tr className="border-t"><td className="px-3 py-2">翻訳辞書</td><td className="px-3 py-2">最大1,000ペア</td><td className="px-3 py-2">最大5,000ペア</td><td className="px-3 py-2">最大20,000ペア</td></tr>
               <tr className="border-t"><td className="px-3 py-2">企業通用辞書</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
               <tr className="border-t"><td className="px-3 py-2">ユーザー統一管理</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
               <tr className="border-t"><td className="px-3 py-2">有効期間</td><td className="px-3 py-2">1か月（自動更新）</td><td className="px-3 py-2">1か月（自動更新）</td><td className="px-3 py-2">1年または1年半</td></tr>
               <tr className="border-t"><td className="px-3 py-2">追加パッケージ</td><td className="px-3 py-2">4種類（当月有効）</td><td className="px-3 py-2">4種類（当月有効）</td><td className="px-3 py-2">自由追加</td></tr>
-              <tr className="border-t"><td className="px-3 py-2">時間譲渡</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
+              <tr className="border-t"><td className="px-3 py-2">時間配分</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
+              <tr className="border-t"><td className="px-3 py-2">サポート</td><td className="px-3 py-2">標準</td><td className="px-3 py-2">標準</td><td className="px-3 py-2">優先サポート</td></tr>
               <tr className="border-t"><td className="px-3 py-2">導入</td><td className="px-3 py-2">即時</td><td className="px-3 py-2">即時</td><td className="px-3 py-2">個別導入（要相談）</td></tr>
             </tbody>
           </table>
+          <div className="mt-6 p-4 bg-50 border border-200 rounded-lg">
+            <h3 className="font-semibold text-800 mb-2">個人版と企業版の主な違い</h3>
+            <div className="text-sm text-700 space-y-2">
+              <p><strong>Personal：</strong>個人用途に限定され、企業請求書の発行はできません。辞書・用語集には制限があり、管理画面も提供されません。有効期限は1か月です。</p>
+              <p><strong>Enterprise：</strong>請求書発行が可能で、有効期間は1年~1.5年です。大容量辞書と企業共通辞書を利用でき、管理画面でのユーザー統一管理や時間配分機能、優先サポートが含まれます。</p>
+            </div>
+          </div>
         </CardWrapper>
       </section>
     </div>
