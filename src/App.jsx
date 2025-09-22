@@ -166,7 +166,7 @@ export default function PricingPage() {
             </thead>
             <tbody>
               <tr className="border-t"><td className="px-3 py-2">対象</td><td className="px-3 py-2">個人ユーザー</td><td className="px-3 py-2">SMB・チーム</td><td className="px-3 py-2">大規模企業・代理店</td></tr>
-              <tr className="border-t"><td className="px-3 py-2">請求書発行</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td><td className="px-3 py-2">◯</td></tr>
+              <tr className="border-t"><td className="px-3 py-2">請求書発行</td><td className="px-3 py-2">✕ 個人用途のみ</td><td className="px-3 py-2">◯</td><td className="px-3 py-2">◯</td></tr>
               <tr className="border-t"><td className="px-3 py-2">音声辞書</td><td className="px-3 py-2">最大200語</td><td className="px-3 py-2">最大500語</td><td className="px-3 py-2">最大500語</td></tr>
               <tr className="border-t"><td className="px-3 py-2">翻訳辞書</td><td className="px-3 py-2">最大1,000ペア</td><td className="px-3 py-2">最大5,000ペア</td><td className="px-3 py-2">最大20,000ペア</td></tr>
               <tr className="border-t"><td className="px-3 py-2">企業通用辞書</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">✕</td><td className="px-3 py-2">◯</td></tr>
@@ -178,6 +178,23 @@ export default function PricingPage() {
               <tr className="border-t"><td className="px-3 py-2">導入</td><td className="px-3 py-2">即時</td><td className="px-3 py-2">即時</td><td className="px-3 py-2">個別導入（要相談）</td></tr>
             </tbody>
           </table>
+          <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+            <h3 className="font-semibold text-gray-800 mb-2">個人版と企業版の主な違い</h3>
+            <div className="text-sm text-gray-700 space-y-3">
+              <div>
+                <p className="font-semibold mb-1">Personal</p>
+                <p>個人でのご利用に限定されており、企業向けの請求書は発行できません。</p>
+                <p>辞書・用語集の利用には数の制限があります。</p>
+                <p>有効期限は1か月となります。</p>
+              </div>
+              <div>
+                <p className="font-semibold mb-1">Enterprise</p>
+                <p>企業向けの請求書発行が可能で、有効期間は1年から1年半です。</p>
+                <p>大容量の辞書および企業共通辞書をご利用いただけるほか、管理画面によるユーザーの一元管理や利用時間の配分機能もご提供いたします。</p>
+                <p>また、優先的なサポート体制も含まれております。</p>
+              </div>
+            </div>
+          </div>
         </CardWrapper>
       </section>
     </div>
