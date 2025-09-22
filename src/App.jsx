@@ -17,6 +17,8 @@ const plansPersonal = [
   { name: "Trial", hours: 2, price: 1600, transcriptionWords: 200, translationWords: 1000 },
   { name: "Professional", hours: 6, price: 4320, transcriptionWords: 200, translationWords: 1000 },
   { name: "Premium", hours: 15, price: 9600, popular: true, transcriptionWords: 200, translationWords: 1000 },
+  { name: "Premium Plus", hours: 30, price: 15600, transcriptionWords: 200, translationWords: 1000 },
+  { name: "Premium Max", hours: 60, price: 30240, transcriptionWords: 200, translationWords: 1000 },
 ];
 
 const enterprisePlan = { 
