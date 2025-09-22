@@ -178,13 +178,6 @@ export default function PricingPage() {
               <tr className="border-t"><td className="px-3 py-2">導入</td><td className="px-3 py-2">即時</td><td className="px-3 py-2">即時</td><td className="px-3 py-2">個別導入（要相談）</td></tr>
             </tbody>
           </table>
-          <div className="mt-6 p-4 bg-50 border border-200 rounded-lg">
-            <h3 className="font-semibold text-800 mb-2">個人版と企業版の主な違い</h3>
-            <div className="text-sm text-700 space-y-2">
-              <p><strong>Personal：</strong>個人用途に限定され、企業請求書の発行はできません。辞書・用語集には制限があり、管理画面も提供されません。有効期限は1か月です。</p>
-              <p><strong>Enterprise：</strong>請求書発行が可能で、有効期間は1年~1.5年です。大容量辞書と企業共通辞書を利用でき、管理画面でのユーザー統一管理や時間配分機能、優先サポートが含まれます。</p>
-            </div>
-          </div>
         </CardWrapper>
       </section>
     </div>
