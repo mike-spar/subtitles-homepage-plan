@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from "react";
 
 // Currency configuration with fixed exchange rates
+// rate = conservative JPY per 1 unit of foreign currency (use lower-bound to avoid undercharging)
 const currencies = {
   JPY: { symbol: "¥", code: "JPY", rate: 1, name: "日本円" },
-  USD: { symbol: "$", code: "USD", rate: 150, name: "米ドル" },
-  CNY: { symbol: "¥", code: "CNY", rate: 21.5, name: "人民元" },
-  TWD: { symbol: "NT$", code: "TWD", rate: 5.0, name: "台湾ドル" }
+  USD: { symbol: "$", code: "USD", rate: 146, name: "米ドル" },
+  CNY: { symbol: "¥", code: "CNY", rate: 20.5, name: "人民元" },
+  TWD: { symbol: "NT$", code: "TWD", rate: 4.85, name: "台湾ドル" }
 };
 
 const tabs = [
@@ -46,8 +47,10 @@ const addOns = [
 
 function formatPrice(n, currency) {
   const currencyInfo = currencies[currency];
-  const convertedPrice = Math.round(n / currencyInfo.rate);
-  
+  // Always round up in non-JPY to avoid undercharging due to fraction truncation
+  const raw = n / currencyInfo.rate;
+  const convertedPrice = currency === 'JPY' ? Math.round(raw) : Math.ceil(raw);
+
   if (currency === 'JPY') {
     return convertedPrice.toLocaleString("ja-JP");
   } else {
