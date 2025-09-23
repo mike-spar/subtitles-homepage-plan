@@ -1,5 +1,13 @@
 import React, { useMemo, useState } from "react";
 
+// Currency configuration with fixed exchange rates
+const currencies = {
+  JPY: { symbol: "¥", code: "JPY", rate: 1, name: "日本円" },
+  USD: { symbol: "$", code: "USD", rate: 150, name: "米ドル" },
+  CNY: { symbol: "¥", code: "CNY", rate: 21.5, name: "人民元" },
+  TWD: { symbol: "NT$", code: "TWD", rate: 5.0, name: "台湾ドル" }
+};
+
 const tabs = [
   { key: "personal", label: "Personalプラン" },
   { key: "business", label: "Businessプラン" },
@@ -36,15 +44,25 @@ const addOns = [
   { hours: 30, price: 30000 },
 ];
 
-function yen(n) {
-  return n.toLocaleString("ja-JP");
+function formatPrice(n, currency) {
+  const currencyInfo = currencies[currency];
+  const convertedPrice = Math.round(n / currencyInfo.rate);
+  
+  if (currency === 'JPY') {
+    return convertedPrice.toLocaleString("ja-JP");
+  } else {
+    return convertedPrice.toLocaleString();
+  }
 }
 
-function Price({ value }) {
+function Price({ value, currency = 'JPY' }) {
+  const currencyInfo = currencies[currency];
   return (
     <div className="flex items-end gap-1">
-      <span className="text-4xl font-semibold tracking-tight">{yen(value)}</span>
-      <span className="text-sm text-zinc-500">JPY/月</span>
+      <span className="text-4xl font-semibold tracking-tight">
+        {currencyInfo.symbol}{formatPrice(value, currency)}
+      </span>
+      <span className="text-sm text-zinc-500">{currency}/月</span>
     </div>
   );
 }
@@ -62,7 +80,7 @@ function CardWrapper({ title, children }) {
   );
 }
 
-function PlanCard({ plan }) {
+function PlanCard({ plan, currency = 'JPY' }) {
   return (
     <div className={`relative flex flex-col rounded-2xl border p-6 shadow-sm bg-white ${plan.popular ? "border-zinc-900" : "border-zinc-200"}`}>
       {plan.popular && (
@@ -72,7 +90,7 @@ function PlanCard({ plan }) {
       )}
       <h3 className="mb-2 text-lg font-semibold tracking-tight">{plan.name}</h3>
       {plan.price ? (<>
-        <Price value={plan.price} />
+        <Price value={plan.price} currency={currency} />
         <PerHour price={plan.price} hours={plan.hours} />
       </>) : (
         <p className="text-zinc-700 mt-2 text-base">{plan.description}</p>
@@ -92,6 +110,7 @@ function PlanCard({ plan }) {
 
 export default function PricingPage() {
   const [activeTab, setActiveTab] = useState("personal");
+  const [selectedCurrency, setSelectedCurrency] = useState("JPY");
   const plans = activeTab === "business" ? plansBusiness : activeTab === "personal" ? plansPersonal : [enterprisePlan];
 
   return (
@@ -126,7 +145,7 @@ export default function PricingPage() {
       <section className="mx-auto max-w-6xl px-4 py-10 space-y-10">
         <CardWrapper>
           <div className={`grid gap-5 ${activeTab === "enterprise" ? "md:grid-cols-1" : "md:grid-cols-2 lg:grid-cols-4"}`}>
-            {plans.map((p) => <PlanCard key={p.name} plan={p} />)}
+            {plans.map((p) => <PlanCard key={p.name} plan={p} currency={selectedCurrency} />)}
           </div>
         </CardWrapper>
 
@@ -138,14 +157,16 @@ export default function PricingPage() {
               <thead className="bg-zinc-50">
                 <tr className="border-b text-zinc-500">
                   <th className="px-4 py-3">時間</th>
-                  <th className="px-4 py-3">総価格（円）</th>
+                  <th className="px-4 py-3">総価格（{selectedCurrency}）</th>
                 </tr>
               </thead>
               <tbody>
                 {addOns.map((a, idx) => (
                   <tr key={idx} className="border-t hover:bg-zinc-50">
                     <td className="px-4 py-3 font-medium">{a.hours}時間</td>
-                    <td className="px-4 py-3">{yen(a.price)}</td>
+                    <td className="px-4 py-3">
+                      {currencies[selectedCurrency].symbol}{formatPrice(a.price, selectedCurrency)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -196,6 +217,24 @@ export default function PricingPage() {
             </div>
           </div>
         </CardWrapper>
+
+        {/* Currency Selector - floating bottom-right */}
+        <div className="fixed bottom-4 right-4 z-40">
+          <div className="rounded-xl border border-zinc-200 bg-white shadow-sm p-2">
+            <div className="text-[10px] text-zinc-500 px-1 pb-1">通貨選択</div>
+            <select
+              value={selectedCurrency}
+              onChange={(e) => setSelectedCurrency(e.target.value)}
+              className="px-3 py-2 border border-zinc-300 rounded-md bg-white text-sm font-medium text-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent min-w-[180px]"
+            >
+              {Object.entries(currencies).map(([code, info]) => (
+                <option key={code} value={code}>
+                  {info.symbol} {code} - {info.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </section>
     </div>
   );
