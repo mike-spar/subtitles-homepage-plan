@@ -1,12 +1,11 @@
 import React, { useMemo, useState } from "react";
 
-// Currency configuration with fixed exchange rates
-// rate = conservative JPY per 1 unit of foreign currency (use lower-bound to avoid undercharging)
+// Currency configuration
 const currencies = {
-  JPY: { symbol: "¥", code: "JPY", rate: 1, name: "日本円" },
-  USD: { symbol: "$", code: "USD", rate: 146, name: "米ドル" },
-  CNY: { symbol: "¥", code: "CNY", rate: 20.5, name: "人民元" },
-  TWD: { symbol: "NT$", code: "TWD", rate: 4.85, name: "台湾ドル" }
+  JPY: { symbol: "¥", code: "JPY", name: "日本円" },
+  USD: { symbol: "$", code: "USD", name: "米ドル" },
+  CNY: { symbol: "¥", code: "CNY", name: "人民元" },
+  TWD: { symbol: "NT$", code: "TWD", name: "台湾ドル" }
 };
 
 const tabs = [
@@ -23,11 +22,42 @@ const plansBusiness = [
 ];
 
 const plansPersonal = [
-  { name: "Trial", hours: 2, price: 1600, transcriptionWords: 200, translationWords: 1000 },
-  { name: "Professional", hours: 6, price: 4320, transcriptionWords: 200, translationWords: 1000 },
-  { name: "Premium", hours: 15, price: 9600, popular: true, transcriptionWords: 200, translationWords: 1000 },
-  { name: "Premium Plus", hours: 30, price: 15600, transcriptionWords: 200, translationWords: 1000 },
-  { name: "Premium Max", hours: 60, price: 30240, transcriptionWords: 200, translationWords: 1000 },
+  {
+    name: "Trial",
+    hours: 2,
+    prices: { JPY: 1600, USD: 11, CNY: 75, TWD: 330 },
+    transcriptionWords: 200,
+    translationWords: 1000
+  },
+  {
+    name: "Professional",
+    hours: 6,
+    prices: { JPY: 4200, USD: 29, CNY: 199, TWD: 880 },
+    transcriptionWords: 200,
+    translationWords: 1000
+  },
+  {
+    name: "Premium",
+    hours: 15,
+    prices: { JPY: 9500, USD: 65, CNY: 450, TWD: 1900 },
+    popular: true,
+    transcriptionWords: 200,
+    translationWords: 1000
+  },
+  {
+    name: "Premium Plus",
+    hours: 30,
+    prices: { JPY: 15500, USD: 105, CNY: 750, TWD: 3200 },
+    transcriptionWords: 200,
+    translationWords: 1000
+  },
+  {
+    name: "Premium Max",
+    hours: 60,
+    prices: { JPY: 29999, USD: 199, CNY: 1400, TWD: 5999 },
+    transcriptionWords: 200,
+    translationWords: 1000
+  },
 ];
 
 const enterprisePlan = { 
@@ -39,31 +69,28 @@ const enterprisePlan = {
 };
 
 const addOns = [
-  { hours: 2, price: 2600 },
-  { hours: 6, price: 7200 },
-  { hours: 15, price: 16500 },
-  { hours: 30, price: 30000 },
+  { hours: 2, prices: { JPY: 2600, USD: 18, CNY: 122, TWD: 536 } },
+  { hours: 6, prices: { JPY: 7200, USD: 50, CNY: 338, TWD: 1485 } },
+  { hours: 15, prices: { JPY: 16500, USD: 114, CNY: 775, TWD: 3402 } },
+  { hours: 30, prices: { JPY: 30000, USD: 207, CNY: 1408, TWD: 6186 } },
 ];
 
-function formatPrice(n, currency) {
-  const currencyInfo = currencies[currency];
-  // Always round up in non-JPY to avoid undercharging due to fraction truncation
-  const raw = n / currencyInfo.rate;
-  const convertedPrice = currency === 'JPY' ? Math.round(raw) : Math.ceil(raw);
-
+function formatPrice(price, currency) {
   if (currency === 'JPY') {
-    return convertedPrice.toLocaleString("ja-JP");
+    return price.toLocaleString("ja-JP");
   } else {
-    return convertedPrice.toLocaleString();
+    return price.toLocaleString();
   }
 }
 
-function Price({ value, currency = 'JPY' }) {
+function Price({ plan, currency = 'JPY' }) {
   const currencyInfo = currencies[currency];
+  const price = plan.prices ? plan.prices[currency] : plan.price;
+
   return (
     <div className="flex items-end gap-1">
       <span className="text-4xl font-semibold tracking-tight">
-        {currencyInfo.symbol}{formatPrice(value, currency)}
+        {currencyInfo.symbol}{formatPrice(price, currency)}
       </span>
       <span className="text-sm text-zinc-500">{currency}/月</span>
     </div>
@@ -92,9 +119,9 @@ function PlanCard({ plan, currency = 'JPY' }) {
         </div>
       )}
       <h3 className="mb-2 text-lg font-semibold tracking-tight">{plan.name}</h3>
-      {plan.price ? (<>
-        <Price value={plan.price} currency={currency} />
-        <PerHour price={plan.price} hours={plan.hours} />
+      {(plan.price || plan.prices) ? (<>
+        <Price plan={plan} currency={currency} />
+        <PerHour price={plan.prices ? plan.prices[currency] : plan.price} hours={plan.hours} />
       </>) : (
         <p className="text-zinc-700 mt-2 text-base">{plan.description}</p>
       )}
@@ -168,7 +195,7 @@ export default function PricingPage() {
                   <tr key={idx} className="border-t hover:bg-zinc-50">
                     <td className="px-4 py-3 font-medium">{a.hours}時間</td>
                     <td className="px-4 py-3">
-                      {currencies[selectedCurrency].symbol}{formatPrice(a.price, selectedCurrency)}
+                      {currencies[selectedCurrency].symbol}{formatPrice(a.prices[selectedCurrency], selectedCurrency)}
                     </td>
                   </tr>
                 ))}
