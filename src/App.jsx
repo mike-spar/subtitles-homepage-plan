@@ -25,14 +25,14 @@ const plansPersonal = [
   {
     name: "Trial",
     hours: 2,
-    prices: { JPY: 1600, USD: 11, CNY: 75, TWD: 330 },
+    prices: { JPY: 1500, USD: 9.9, CNY: 69, TWD: 299 },
     transcriptionWords: 200,
     translationWords: 1000
   },
   {
     name: "Professional",
     hours: 6,
-    prices: { JPY: 4200, USD: 29, CNY: 199, TWD: 880 },
+    prices: { JPY: 4200, USD: 29, CNY: 199, TWD: 850 },
     transcriptionWords: 200,
     translationWords: 1000
   },
@@ -69,10 +69,10 @@ const enterprisePlan = {
 };
 
 const addOns = [
-  { hours: 2, prices: { JPY: 2600, USD: 18, CNY: 122, TWD: 536 } },
-  { hours: 6, prices: { JPY: 7200, USD: 50, CNY: 338, TWD: 1485 } },
-  { hours: 15, prices: { JPY: 16500, USD: 114, CNY: 775, TWD: 3402 } },
-  { hours: 30, prices: { JPY: 30000, USD: 207, CNY: 1408, TWD: 6186 } },
+  { hours: 2, prices: { JPY: 2400, USD: 16, CNY: 110, TWD: 490 } },
+  { hours: 6, prices: { JPY: 6999, USD: 45, CNY: 320, TWD: 1400 } },
+  { hours: 15, prices: { JPY: 15999, USD: 109, CNY: 750, TWD: 3200 } },
+  { hours: 30, prices: { JPY: 29999, USD: 199, CNY: 1400, TWD: 5999 } },
 ];
 
 function formatPrice(price, currency) {
