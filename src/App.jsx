@@ -15,10 +15,35 @@ const tabs = [
 ];
 
 const plansBusiness = [
-  { name: "Trial", hours: 1, price: 1300, transcriptionWords: 500, translationWords: 5000 },
-  { name: "Professional", hours: 10, price: 12000, transcriptionWords: 500, translationWords: 5000 },
-  { name: "Premium", hours: 30, price: 33000, popular: true, transcriptionWords: 500, translationWords: 5000 },
-  { name: "Premium Plus", hours: 100, price: 100000, transcriptionWords: 500, translationWords: 5000 },
+  {
+    name: "Trial",
+    hours: 1,
+    prices: { JPY: 1200, USD: 8.2, CNY: 59, TWD: 250 },
+    transcriptionWords: 500,
+    translationWords: 5000
+  },
+  {
+    name: "Professional",
+    hours: 10,
+    prices: { JPY: 11000, USD: 79, CNY: 550, TWD: 2400 },
+    transcriptionWords: 500,
+    translationWords: 5000
+  },
+  {
+    name: "Premium",
+    hours: 30,
+    prices: { JPY: 32000, USD: 210, CNY: 1500, TWD: 6600 },
+    popular: true,
+    transcriptionWords: 500,
+    translationWords: 5000
+  },
+  {
+    name: "Premium Plus",
+    hours: 100,
+    prices: { JPY: 99999, USD: 660, CNY: 4800, TWD: 19999 },
+    transcriptionWords: 500,
+    translationWords: 5000
+  },
 ];
 
 const plansPersonal = [
